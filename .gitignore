@@ -3,4 +3,4 @@ target/
 .settings/
 .classpath
 .metadata/
-
+.DS_Store
