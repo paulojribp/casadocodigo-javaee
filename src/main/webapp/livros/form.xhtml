@@ -10,24 +10,24 @@
 		<div>
 			<h:outputLabel value="Título" />
 			<h:inputText value="#{adminLivrosBean.livro.titulo}"
-				required="true" requiredMessage="O Título é um campo obrigatório!" />
+				required="true" />
 		</div>
 		<div>
 			<h:outputLabel value="Descrição"/>
-			<h:inputTextarea rows="4" cols="20" requiredMessage="A Descrição é Obrigatória"
+			<h:inputTextarea rows="4" cols="20"
 				required="true" value="#{adminLivrosBean.livro.descricao}" />
 		</div>
 		<div>
 			<h:outputLabel value="Número de Páginas"/>
 			<h:inputText value="#{adminLivrosBean.livro.numeroPaginas}" 
-				required="true" requiredMessage="O Número de Páginas é Obrigatório">
+				required="true">
 				<f:validateLongRange minimum="80" />
 			</h:inputText>
 		</div>
 		<div>
 			<h:outputLabel value="Preço"/>
 			<h:inputText value="#{adminLivrosBean.livro.preco}" 
-				required="true" requiredMessage="O Preço é Obrigatório">
+				required="true">
 				<f:validateDoubleRange minimum="20" maximum="150" />
 			</h:inputText>
 		</div>
