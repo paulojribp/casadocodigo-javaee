@@ -4,3 +4,5 @@ target/
 .classpath
 .metadata/
 .DS_Store
+.tern-project
+
