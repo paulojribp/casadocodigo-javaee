@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
@@ -33,7 +35,10 @@ public class AdminLivrosBean {
 			livro.getAutores().add(new Autor(autorId));
 		}
 		dao.salvar(livro);
-		System.out.println("Livro Cadastrado: " + livro);
+		FacesContext.getCurrentInstance().getExternalContext()
+			.getFlash().setKeepMessages(true);
+		FacesContext.getCurrentInstance()
+			.addMessage(null, new FacesMessage("Livro cadastrado com sucesso!"));
 		
 		return "/livros/lista?faces-redirect=true";
 	}
