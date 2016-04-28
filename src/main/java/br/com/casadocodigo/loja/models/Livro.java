@@ -98,7 +98,14 @@ public class Livro {
 	public void setCapaPath(String capaPath) {
 		this.capaPath = capaPath;
 	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
+	
 	
 }
 
