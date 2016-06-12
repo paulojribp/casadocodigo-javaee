@@ -1,6 +1,5 @@
 package br.com.casadocodigo.loja.models;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,10 +12,6 @@ public class CarrinhoCompras {
 		itens.add(item);
 	}
 
-	public Collection<CarrinhoItem> getItens() {
-		return itens;
-	}
-	
 }
 
 

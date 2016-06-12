@@ -1,7 +1,5 @@
 package br.com.casadocodigo.loja.beans;
 
-import java.util.Collection;
-
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
@@ -25,10 +23,6 @@ public class CarrinhoComprasBean {
 		carrinho.add(item);
 		
 		return "carrinho?faces-redirect=true";
-	}
-	
-	public Collection<CarrinhoItem> getItens() {
-		return carrinho.getItens();
 	}
 	
 }
