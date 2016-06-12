@@ -258,64 +258,26 @@
 
 	<main>
 		<section class="infoSection container">
-	<h2 class="infoSection-titulo">Seu carrinho</h2>
+	<h2 class="infoSection-titulo">Checkout</h2>
 	
-<form class="formularioDoCarrinho" method="post" jsf:id="formCarrinho">
-	<table class="formularioDoCarrinho-tabela">
-		<thead class="formularioDoCarrinho-cabecalho">
-			<tr>
-				<th></th>
-				<th class="formularioDoCarrinho-cabecalho-item">Item</th>
-				<th class="formularioDoCarrinho-cabecalho-item formularioDoCarrinho-cabecalho-preco">Preço</th>
-				<th class="formularioDoCarrinho-cabecalho-item">Qtd</th>
-				<th class="formularioDoCarrinho-cabecalho-item">Total</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<ui:repeat value="#{carrinhoCompras.itens}" var="carrinhoItem" varStatus="loop">
-			<tr>
-				<td class="formularioDoCarrinho-item">
-					<a href="#{request.contextPath}/livro-detalhe.xhtml?id=#{carrinhoItem.livro.id}">
-						<img class="formularioDoCarrinho-item-imagem" 
-							src="#{request.contextPath}/file/#{carrinhoItem.livro.capaPath}" />
-					</a>
-				</td>
-				<td class="formularioDoCarrinho-item">
-					<h2 class="formularioDoCarrinho-item-titulo">#{carrinhoItem.livro.titulo}</h2>
-				</td>
-				<td class="formularioDoCarrinho-item formularioDoCarrinho-item-preco">R$ #{carrinhoItem.livro.preco}</td>
-				<td class="formularioDoCarrinho-item">
-					<input class="formularioDoCarrinho-item-quantidade" type="number" min="0"
-						jsf:value="#{carrinhoCompras.itens[loop.index].quantidade}" />
-				</td>
-				<td class="formularioDoCarrinho-item formularioDoCarrinho-item-precoTotal" title="Preço unitário: R$ #{carrinhoItem.livro.preco}">R$ #{carrinhoCompras.getTotal(carrinhoItem)}</td>
-				<td class="formularioDoCarrinho-item">
-					<a jsf:action="#{carrinhoComprasBean.remover(carrinhoItem)}">
-						<img class="formularioDoCarrinho-item-remover-imagem" src="#{request.contextPath}/resources/imagens/trash.png" alt="X" title="Remover" />
-					</a>
-				</td>
-			</tr>
-			</ui:repeat>
-		</tbody>
-		<tfoot class="formularioDoCarrinho-rodape">
-			<tr>
-				<td class="formularioDoCarrinho-rodape-item formularioDoCarrinho-finalizar" colspan="3">
-					<button class="formularioDoCarrinho-finalizar-botao" jsf:action="checkout" 
-						type="submit">Finalizar<span class="formularioDoCarrinho-finalizar-botao-texto" role="presentation"> compra</span>
-					</button>
-				</td>
-				<td class="formularioDoCarrinho-rodape-item">
-					<button class="formularioDoCarrinho-atualizar" 
-						type="submit" jsf:id="btnAtualizar">Atualizar</button>
-				</td>
-				<td class="formularioDoCarrinho-rodape-item">
-					R$ #{carrinhoCompras.getTotal()}
-				</td>
-				<td></td>
-			</tr>
-		</tfoot>
-	</table>
+<form method="post" jsf:id="formCheckout">
+	<div class="form-group">
+		<label>Nome</label>
+		<input class="form-control" type="text" autofocus="autofocus" placeholder="Nome Completo"
+			jsf:value="#{checkoutBean.usuario.nome}" />
+	</div>
+	<div class="form-group">
+		<label>E-mail</label>
+		<input class="form-control" type="email" placeholder="E-mail"
+			jsf:value="#{checkoutBean.usuario.email}" />
+	</div>
+	<div class="form-group">
+		<label>Senha</label>
+		<input class="form-control" type="password" placeholder="Senha"
+			jsf:value="#{checkoutBean.usuario.senha}" />
+	</div>
+	<button class="btn btn-primary" type="submit"
+		jsf:action="#{checkoutBean.finalizar}">Finalizar Compra</button>
 </form>
 	
 </section>
