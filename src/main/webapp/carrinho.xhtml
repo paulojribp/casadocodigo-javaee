@@ -273,12 +273,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<ui:repeat value="#{carrinhoComprasBean.itens}" var="carrinhoItem">
+			<ui:repeat value="#{carrinhoCompras.itens}" var="carrinhoItem">
 			<tr>
 				<td class="formularioDoCarrinho-item">
-					<a href="#{request.contextoPath}/livro-detalhe.xhtml?id=#{carrinhoItem.livro.id}">
+					<a href="#{request.contextPath}/livro-detalhe.xhtml?id=#{carrinhoItem.livro.id}">
 						<img class="formularioDoCarrinho-item-imagem" 
-							src="#{request.contextoPath}/file/#{carrinhoItem.livro.capaPath}" />
+							src="#{request.contextPath}/file/#{carrinhoItem.livro.capaPath}" />
 					</a>
 				</td>
 				<td class="formularioDoCarrinho-item">
@@ -288,10 +288,10 @@
 				<td class="formularioDoCarrinho-item">
 					<input class="formularioDoCarrinho-item-quantidade" type="number" min="0" value="#{carrinhoItem.quantidade}" />
 				</td>
-				<td class="formularioDoCarrinho-item formularioDoCarrinho-item-precoTotal" title="Preço unitário: R$ #{carrrinhoItem.livro.preco}">R$#{carrrinhoItem.livro.preco}</td>
+				<td class="formularioDoCarrinho-item formularioDoCarrinho-item-precoTotal" title="Preço unitário: R$ #{carrinhoItem.livro.preco}">R$ #{carrinhoCompras.getTotal(carrinhoItem)}</td>
 				<td class="formularioDoCarrinho-item">
 					<a href="https://www.casadocodigo.com.br/cart/change?id=18404155847&amp;quantity=0">
-						<img class="formularioDoCarrinho-item-remover-imagem" src="#{request.contextoPath}/resources/imagens/trash.png" alt="X" title="Remover" />
+						<img class="formularioDoCarrinho-item-remover-imagem" src="#{request.contextPath}/resources/imagens/trash.png" alt="X" title="Remover" />
 					</a>
 				</td>
 			</tr>
@@ -306,7 +306,7 @@
 					<button class="formularioDoCarrinho-atualizar" type="submit" name="update">Atualizar</button>
 				</td>
 				<td class="formularioDoCarrinho-rodape-item">
-					R$79,80
+					R$ #{carrinhoCompras.getTotal()}
 				</td>
 				<td></td>
 			</tr>
