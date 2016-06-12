@@ -86,7 +86,7 @@
 <body cz-shortcut-listen="true">
 	<header role="banner" class="cabecalhoPrincipal container">
 		<h1 class="cabecalhoPrincipal-titulo">
-			<a tabindex="1" href="https://www.casadocodigo.com.br/" class="cabecalhoPrincipal-linkTitulo">
+			<a tabindex="1" href="#{request.contextPath}/index.xhtml" class="cabecalhoPrincipal-linkTitulo">
 				<svg class="logo" role="img" aria-labelledby="altLogo" width="157px" height="55px" viewBox="-181 211.4 207.5 55" preserveAspectRatio="xMinYMid slice">
 	<title id="altLogo">Casa do Código - Livros e Tecnologia</title>
 	<rect class="logo-backgroundSimbolo" x="-181" y="211.4" width="65" height="55"></rect>
@@ -244,12 +244,12 @@
 			<a tabindex="3" href="https://www.casadocodigo.com.br/cart" title="Ir para sacola de compras" class="sacola cabecalhoPrincipal-itemNavegacao">
 				<svg width="28px" height="34px" viewBox="0 0 28 34" role="img" aria-labelledby="sacolaLabel" class="sacola-icone">
 					<title id="sacolaLabel">
-						Você tem 0 itens na sacola
+						Você tem #{carrinhoCompras.getQuantidadeTotal()} itens na sacola
 					</title>
 					<path fill="#f8965d" d="M1.66666667,26.9714355 L18.3333333,26.9714355 C19.2533333,26.9714355 20,26.2247689 20,25.3047689 L20,6.97143555 C20,6.05143555 19.2533333,5.30476888 18.3333333,5.30476888 L14.9916667,5.30476888 C14.9516667,2.53643555 12.735,0.30476888 10,0.30476888 C7.265,0.30476888 5.04833333,2.53643555 5.00833333,5.30476888 L1.66666667,5.30476888 C0.746666667,5.30476888 0,6.05143555 0,6.97143555 L0,25.3047689 C0,26.2247689 0.746666667,26.9714355 1.66666667,26.9714355 L1.66666667,26.9714355 Z M12.5,10.3047689 L7.5,10.3047689 C7.04,10.3047689 6.66666667,9.93143555 6.66666667,9.47143555 C6.66666667,9.01143555 7.04,8.63810221 7.5,8.63810221 L12.5,8.63810221 C12.96,8.63810221 13.3333333,9.01143555 13.3333333,9.47143555 C13.3333333,9.93143555 12.96,10.3047689 12.5,10.3047689 L12.5,10.3047689 Z M10,1.97143555 C11.8116667,1.97143555 13.285,3.45976888 13.325,5.30476888 L6.675,5.30476888 C6.715,3.45976888 8.18833333,1.97143555 10,1.97143555 L10,1.97143555 Z"></path>
 					<g>
 						<circle cx="19.5" cy="24.8047689" r="8.5" role="presentation" fill="#FFF"></circle>
-						<text text-decoration="none" text-anchor="middle" x="19.5" y="30" class="sacola-contador">0</text>
+						<text text-decoration="none" text-anchor="middle" x="19.5" y="30" class="sacola-contador">#{carrinhoCompras.getQuantidadeTotal()}</text>
 					</g>
 				 </svg>
 			</a>
@@ -260,7 +260,7 @@
 		<section class="infoSection container">
 	<h2 class="infoSection-titulo">Seu carrinho</h2>
 	
-	<form class="formularioDoCarrinho" action="https://www.casadocodigo.com.br/cart" method="post">
+<form class="formularioDoCarrinho" method="post" jsf:id="formCarrinho">
 	<table class="formularioDoCarrinho-tabela">
 		<thead class="formularioDoCarrinho-cabecalho">
 			<tr>
@@ -273,7 +273,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<ui:repeat value="#{carrinhoCompras.itens}" var="carrinhoItem">
+			<ui:repeat value="#{carrinhoCompras.itens}" var="carrinhoItem" varStatus="loop">
 			<tr>
 				<td class="formularioDoCarrinho-item">
 					<a href="#{request.contextPath}/livro-detalhe.xhtml?id=#{carrinhoItem.livro.id}">
@@ -286,11 +286,12 @@
 				</td>
 				<td class="formularioDoCarrinho-item formularioDoCarrinho-item-preco">R$ #{carrinhoItem.livro.preco}</td>
 				<td class="formularioDoCarrinho-item">
-					<input class="formularioDoCarrinho-item-quantidade" type="number" min="0" value="#{carrinhoItem.quantidade}" />
+					<input class="formularioDoCarrinho-item-quantidade" type="number" min="0"
+						jsf:value="#{carrinhoCompras.itens[loop.index].quantidade}" />
 				</td>
 				<td class="formularioDoCarrinho-item formularioDoCarrinho-item-precoTotal" title="Preço unitário: R$ #{carrinhoItem.livro.preco}">R$ #{carrinhoCompras.getTotal(carrinhoItem)}</td>
 				<td class="formularioDoCarrinho-item">
-					<a href="https://www.casadocodigo.com.br/cart/change?id=18404155847&amp;quantity=0">
+					<a jsf:action="#{carrinhoComprasBean.remover(carrinhoItem)}">
 						<img class="formularioDoCarrinho-item-remover-imagem" src="#{request.contextPath}/resources/imagens/trash.png" alt="X" title="Remover" />
 					</a>
 				</td>
@@ -303,7 +304,8 @@
 					<button class="formularioDoCarrinho-finalizar-botao" type="submit" name="checkout">Finalizar<span class="formularioDoCarrinho-finalizar-botao-texto" role="presentation"> compra</span></button>
 				</td>
 				<td class="formularioDoCarrinho-rodape-item">
-					<button class="formularioDoCarrinho-atualizar" type="submit" name="update">Atualizar</button>
+					<button class="formularioDoCarrinho-atualizar" 
+						type="submit" jsf:id="btnAtualizar">Atualizar</button>
 				</td>
 				<td class="formularioDoCarrinho-rodape-item">
 					R$ #{carrinhoCompras.getTotal()}

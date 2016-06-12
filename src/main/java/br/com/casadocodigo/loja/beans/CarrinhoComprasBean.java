@@ -27,6 +27,10 @@ public class CarrinhoComprasBean {
 		return "carrinho?faces-redirect=true";
 	}
 	
+	public void remover(CarrinhoItem item) {
+		carrinho.remover(item);
+	}
+	
 	public List<CarrinhoItem> getItens() {
 		return carrinho.getItens();
 	}
