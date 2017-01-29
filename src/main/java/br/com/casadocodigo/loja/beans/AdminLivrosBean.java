@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.beans;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -37,6 +38,8 @@ public class AdminLivrosBean {
 		String capaPath = fileSaver.write(capaLivro, "livros");
 		livro.setCapaPath(capaPath);
 		dao.salvar(livro);
+		FileSaver fileSaver = new FileSaver();
+		livro.setCapaPath(fileSaver.write(capaLivro, "livros"));
 		
 		context.getExternalContext()
 			.getFlash().setKeepMessages(true);
