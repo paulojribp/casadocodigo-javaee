@@ -14,7 +14,7 @@ public class AutorDao {
 
 	public List<Autor> listar() {
 		return manager.createQuery(
-				"select a from Autor a", Autor.class)
+				"select a from Autor a order by a.nome asc", Autor.class)
 				.getResultList();
 	}
 	
