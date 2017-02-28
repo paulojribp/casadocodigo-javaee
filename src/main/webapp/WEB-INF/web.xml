@@ -15,4 +15,39 @@
   	<param-value>900</param-value>
   </context-param>
   
+  <security-constraint>
+  	<display-name>Administration</display-name>
+  	<web-resource-collection>
+  		<web-resource-name>administration</web-resource-name>
+  		<description>URLs que levam para a administração da loja</description>
+  		<url-pattern>/livros/*</url-pattern>
+  		<http-method>GET</http-method>
+  		<http-method>POST</http-method>
+  	</web-resource-collection>
+  	<auth-constraint>
+  		<role-name>ADMIN</role-name>
+  	</auth-constraint>
+  </security-constraint>
+  
+  <login-config>
+  	<auth-method>FORM</auth-method>
+  	<form-login-config>
+  		<form-login-page>
+  			/usuarios/login.xhtml
+  		</form-login-page>
+  		<form-error-page>
+  			/usuarios/login.xhtml
+  		</form-error-page>
+  	</form-login-config>
+  </login-config>
+  
+  
+  
+  
 </web-app>
+
+
+
+
+
+
