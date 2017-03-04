@@ -2,30 +2,16 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+  xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<h:head>
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet library="css" name="style-admin.css" />
-</h:head>
+<ui:composition template="/templates/_admin_template.xhtml">
 
-<h:body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Casa do Código</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><h:link value="Lista" outcome="lista" /></li>
-            <li class="active"><a href="#">Cadastro</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+	<ui:param name="cadastro" value="active" />
+
+	<ui:define name="body">
 	
-	<div class="container">
 	<h1>Cadastro de Livros</h1>
 	
 	<h:form enctype="multipart/form-data">
@@ -78,11 +64,12 @@
 		<h:commandButton value="Cadastrar" action="#{adminLivrosBean.salvar}"
 			styleClass="btn btn-primary" />
 	</h:form>
-	</div>
-</h:body>
+
+	</ui:define>
+	
+</ui:composition>
+
 </html>
-
-
 
 
 

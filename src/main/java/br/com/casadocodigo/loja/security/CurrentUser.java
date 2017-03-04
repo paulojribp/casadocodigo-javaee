@@ -28,6 +28,12 @@ public class CurrentUser {
 		return request.isUserInRole(role);
 	}
 	
+	public String logout() {
+		request.getSession().invalidate();
+		
+		return "/livros/lista.xhtml?faces-redirect=true";
+	}
+	
 	@PostConstruct
 	public void loadSystemUser() {
 		Principal principal = request.getUserPrincipal();
